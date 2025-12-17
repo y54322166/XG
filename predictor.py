@@ -157,3 +157,6 @@ if st.button("Predict", use_container_width=True):
                 # 保存并显示图像
                 plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=300)
                 st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
+finally:
+    # 清理代码，无论是否发生异常都会执行
+    print("图像加载尝试完成")          
