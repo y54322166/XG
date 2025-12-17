@@ -16,8 +16,6 @@ import shap
 # 导入 Matplotlib 库，用于数据可视化
 import matplotlib.pyplot as plt
 
-# 从 LIME 库中导入 LimeTabularExplainer，用于解释表格数据的机器学习模型
-from lime.lime_tabular import LimeTabularExplainer
 
 # 加载训练好的随机森林模型（XGBoost.pkl）
 model = joblib.load('XGBoost.pkl')
