@@ -45,13 +45,13 @@ st.title("CO₂ Adsorption Capacity Predictor")  # 设置网页标题
 SSA = st.number_input("SSA,m²/g)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
 
 # 总孔体积：数值输入框
-PV = st.number_input("(PV, cm³/g)", min_value=0.0, max_value=1.58, value=0.5, step=0.01)
+PV = st.number_input("(PV, cm³/g)", min_value=0.0, max_value=1.58, value=0.5, step=0.0001)
 
 # 介孔体积：数值输入框
-Vme = st.number_input("(Vme, cm³/g)", min_value=0.0, max_value=0.67, value=0.3, step=0.01)
+Vme = st.number_input("(Vme, cm³/g)", min_value=0.0, max_value=0.67, value=0.3, step=0.0001)
 
 # 微孔体积：数值输入框
-Vmi = st.number_input("(Vmi, cm³/g)", min_value=0.0, max_value=1.07, value=0.2, step=0.01)
+Vmi = st.number_input("(Vmi, cm³/g)", min_value=0.0, max_value=1.07, value=0.2, step=0.0001)
 
 # 温度 (RT, ℃)：数值输入框
 RT = st.number_input("(RT,℃)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
