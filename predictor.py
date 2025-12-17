@@ -133,30 +133,36 @@ if st.button("Predict", use_container_width=True):
             st.markdown(" SHAP 解释")
             
             try:
-                # 创建SHAP解释器
-                explainer_shap = shap.TreeExplainer(model)
-                
-                # 计算SHAP值
-                shap_values = explainer_shap.shap_values(features)
-                
-                # 创建图表
-                fig, ax = plt.subplots(figsize=(12, 6))
-                
-                # 创建SHAP force plot
-                shap.force_plot(
-                    explainer_shap.expected_value,
-                    shap_values[0] if len(shap_values.shape) == 2 else shap_values,
-                    pd.DataFrame([feature_values], columns=feature_names),
-                    matplotlib=True,
-                    show=False
-                )
-                
-                plt.title("SHAP Force Plot - 特征贡献可视化", fontsize=14, pad=20)
-                plt.tight_layout()
-                
-                # 保存并显示图像
-                plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=300)
-                st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
+    # 创建SHAP解释器
+    explainer_shap = shap.TreeExplainer(model)
+    
+    # 计算SHAP值
+    shap_values = explainer_shap.shap_values(features)
+    
+    # 创建图表
+    fig, ax = plt.subplots(figsize=(12, 6))
+    
+    # 创建SHAP force plot
+    shap.force_plot(
+        explainer_shap.expected_value,
+        shap_values[0] if len(shap_values.shape) == 2 else shap_values,
+        pd.DataFrame([feature_values], columns=feature_names),
+        matplotlib=True,
+        show=False
+    )
+    
+    plt.title("SHAP Force Plot - 特征贡献可视化", fontsize=14, pad=20)
+    plt.tight_layout()
+    
+    # 保存并显示图像
+    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=300)
+    st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
+    
+except Exception as e:
+    # 捕获所有异常并显示错误信息
+    st.error(f"生成SHAP解释图时出错: {str(e)}")
+    st.info("请检查: 1) 模型是否支持SHAP解释 2) 特征数据格式是否正确")
+    
 finally:
-    # 清理代码，无论是否发生异常都会执行
-    print("图像加载尝试完成")          
+    # 无论是否发生异常都执行清理
+    plt.close('all')  # 关闭所有matplotlib图形，释放内存
