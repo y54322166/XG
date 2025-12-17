@@ -57,7 +57,7 @@ Vmi = st.number_input("(Vmi, cm³/g)", min_value=0.0, max_value=1.07, value=0.2,
 RT = st.number_input("(RT,℃)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
 
 # 压强 (P, bar)：数值输入框
-P = st.number_input("压强 (P, bar) [0.1步进]", 
+P = st.number_input("(P, bar) ", 
                     min_value=0.0, 
                     max_value=50.0, 
                     value=1.0, 
@@ -74,7 +74,7 @@ N = st.number_input("(N, %)", min_value=0.0, max_value=50.0, value=5.0, step=0.5
 O = st.number_input("(O, %)", min_value=0.0, max_value=50.0, value=10.0, step=0.5)  # 修正：变量名改为大写O以保持一致性
 
 # 前驱体类型 (Pre)：分类选择框（0-130）
-Pre = st.selectbox("(Pre)：", options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+Pre = st.selectbox("(Pre)：", options=range(0, 131))  # 包含0到130
 
 # 改性方法（Mod）：分类选择框（0-9）
 Mod = st.selectbox("(Mod)：", options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -87,9 +87,9 @@ features = np.array([feature_values])  # 将特征转换为 NumPy 数组，适�
 if st.button("Predict", use_container_width=True):
     
     if model is None:
-        st.error("无法进行预测，模型未加载成功")
+        st.error("Prediction unavailable: model failed to load successfully")
     else:
-        with st.spinner("正在计算预测结果..."):
+        with st.spinner("Calculating prediction results..."):
             # 预测吸附量
             predicted_value = model.predict(features)[0]
             
@@ -102,34 +102,34 @@ if st.button("Predict", use_container_width=True):
             
             # 显示预测结果
             st.markdown('<div class="prediction-box">', unsafe_allow_html=True)
-            st.markdown("预测结果")
+            st.markdown("Prediction Results")
             
             col1, col2 = st.columns(2)
             
             with col1:
-                st.write(f"预测吸附量:")
+                st.write(f"Predicted Adsorption Capacity:")
                 st.markdown(f"# {predicted_value:.2f} mmol/g")
             
             with col2:
                 if has_proba:
                     probability = predicted_proba[1] * 100 if len(predicted_proba) > 1 else predicted_proba[0] * 100
-                    st.write(f"模型置信度:")
+                    st.write(f"Model Confidence:")
                     st.markdown(f"# {probability:.1f}%")
             
             st.markdown('</div>', unsafe_allow_html=True)
             
             # 根据预测结果生成建议
-            st.markdown("材料性能评估")
+            st.markdown("Material Performance Evaluation")
             
             if predicted_value > 5.0:
-                st.success("优秀吸附材料：预测吸附量较高，具有良好的CO₂吸附潜力")
-                st.info("建议：该材料适合用于工业CO₂捕获应用")
+                st.success("Excellent adsorbent material: predicted high CO₂ adsorption capacity with strong CO₂ capture potential")
+                st.info("Recommendation: This material is well-suited for industrial CO₂ capture applications")
             elif predicted_value > 3.0:
-                st.warning("良好吸附材料：预测吸附量中等，具有一定的CO₂吸附能力")
-                st.info("建议：可以考虑进一步优化材料结构以提高吸附性能")
+                st.warning("Good adsorbent material: predicted moderate CO₂ adsorption capacity with appreciable CO₂ uptake capability")
+                st.info("Recommendation: Further optimization of the material structure may be considered to enhance adsorption performance")
             else:
-                st.error("一般吸附材料：预测吸附量较低，CO₂吸附能力有限")
-                st.info("建议：建议调整材料组成或制备工艺以改善吸附性能")
+                st.error("Fair adsorbent material: predicted low CO₂ adsorption capacity with limited CO₂ uptake capability")
+                st.info("Recommendation: Adjusting the material composition or synthesis route is advised to improve adsorption performance")
             
             # SHAP 解释
             st.markdown(" SHAP 解释")
@@ -153,7 +153,7 @@ if st.button("Predict", use_container_width=True):
                     show=False
                 )
                 
-                plt.title("SHAP Force Plot - 特征贡献可视化", fontsize=14, pad=20)
+                plt.title("SHAP Force Plot - Feature Contribution Visualization", fontsize=14, pad=20)
                 plt.tight_layout()
                 
                 # 保存并显示图像
