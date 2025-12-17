@@ -42,7 +42,7 @@ feature_names = [
 st.title("CO₂ Adsorption Capacity Predictor")  # 设置网页标题
 
 # 比表面积：数值输入框
-SSA = st.number_input(" (m²/g)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
+SSA = st.number_input("SSA,m²/g)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
 
 # 总孔体积：数值输入框
 PV = st.number_input("(PV, cm³/g)", min_value=0.0, max_value=1.58, value=0.5, step=0.01)
@@ -53,11 +53,11 @@ Vme = st.number_input("(Vme, cm³/g)", min_value=0.0, max_value=0.67, value=0.3,
 # 微孔体积：数值输入框
 Vmi = st.number_input("(Vmi, cm³/g)", min_value=0.0, max_value=1.07, value=0.2, step=0.01)
 
-# 温度 (RT, K)：数值输入框
-RT = st.number_input("(RT, K)", min_value=200.0, max_value=500.0, value=298.0, step=1.0)
+# 温度 (RT, ℃)：数值输入框
+RT = st.number_input("(RT,℃)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
 
 # 压强 (P, bar)：数值输入框
-P = st.number_input("(P, bar)", min_value=0.0, max_value=50, value=1.0, step=0.01)
+P = st.number_input("(P, bar)", min_value=0.0, max_value=50, value=1.0, step=0.1,format="%.1f")
 
 # 碳含量 (C, %)：数值输入框
 C = st.number_input("(C, %)", min_value=0.0, max_value=100.0, value=80.0, step=1.0)  # 修正：变量名改为大写C以保持一致性
