@@ -23,7 +23,7 @@ from lime.lime_tabular import LimeTabularExplainer
 model = joblib.load('XGBoost.pkl')
 
 # 从 X-test.csv 文件加载测试数据，以便用于 LIME 解释器
-X_test = pd.read_csv('X-test.csv')
+X_test = pd.read_csv('X-test.csv')  # 修正：变量名改为下划线
 
 # 定义特征名称，对应数据集中的列名
 feature_names = [
@@ -38,7 +38,6 @@ feature_names = [
     "O",    # 氧含量
     "Pre",   # 前驱体物质
     "Mod",   # 改性方法
-    
 ]
 
 # Streamlit 用户界面
@@ -63,19 +62,19 @@ RT = st.number_input("温度 (RT, K)", min_value=200.0, max_value=500.0, value=2
 P = st.number_input("压强 (P, bar)", min_value=0.0, max_value=50, value=1.0, step=0.1)
 
 # 碳含量 (C, %)：数值输入框
-c = st.number_input("碳含量 (C, %)", min_value=0.0, max_value=100.0, value=80.0, step=1.0)
+C = st.number_input("碳含量 (C, %)", min_value=0.0, max_value=100.0, value=80.0, step=1.0)  # 修正：变量名改为大写C以保持一致性
 
 # 氮含量 (N, %)：数值输入框
-n = st.number_input("氮含量 (N, %)", min_value=0.0, max_value=50.0, value=5.0, step=0.5)
+N = st.number_input("氮含量 (N, %)", min_value=0.0, max_value=50.0, value=5.0, step=0.5)  # 修正：变量名改为大写N以保持一致性
 
 # 氧含量 (O, %)：数值输入框
-o = st.number_input("氧含量 (O, %)", min_value=0.0, max_value=50.0, value=10.0, step=0.5)
+O = st.number_input("氧含量 (O, %)", min_value=0.0, max_value=50.0, value=10.0, step=0.5)  # 修正：变量名改为大写O以保持一致性
 
 # 前驱体类型 (Pre)：分类选择框（0-130）
-Pre = st.selectbox("前驱体类型 (Pre)：", options=[0, 1, 2,3,4,5,6,7,8,9,10,11,12])
+Pre = st.selectbox("前驱体类型 (Pre)：", options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 # 改性方法（Mod）：分类选择框（0-9）
-Mod= st.selectbox("改性方法 (Mod)：", options=[0, 1, 2, 3, 4,5,6,7,8,9])
+Mod = st.selectbox("改性方法 (Mod)：", options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 # 处理输入数据并进行预测
 feature_values = [SSA, PV, Vme, Vmi, RT, P, C, N, O, Pre, Mod]  # 将用户输入的特征值存入列表
@@ -133,36 +132,36 @@ if st.button("Predict", use_container_width=True):
             st.markdown(" SHAP 解释")
             
             try:
-    # 创建SHAP解释器
-    explainer_shap = shap.TreeExplainer(model)
-    
-    # 计算SHAP值
-    shap_values = explainer_shap.shap_values(features)
-    
-    # 创建图表
-    fig, ax = plt.subplots(figsize=(12, 6))
-    
-    # 创建SHAP force plot
-    shap.force_plot(
-        explainer_shap.expected_value,
-        shap_values[0] if len(shap_values.shape) == 2 else shap_values,
-        pd.DataFrame([feature_values], columns=feature_names),
-        matplotlib=True,
-        show=False
-    )
-    
-    plt.title("SHAP Force Plot - 特征贡献可视化", fontsize=14, pad=20)
-    plt.tight_layout()
-    
-    # 保存并显示图像
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=300)
-    st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
-    
-except Exception as e:
-    # 捕获所有异常并显示错误信息
-    st.error(f"生成SHAP解释图时出错: {str(e)}")
-    st.info("请检查: 1) 模型是否支持SHAP解释 2) 特征数据格式是否正确")
-    
-finally:
-    # 无论是否发生异常都执行清理
-    plt.close('all')  # 关闭所有matplotlib图形，释放内存
+                # 创建SHAP解释器
+                explainer_shap = shap.TreeExplainer(model)
+                
+                # 计算SHAP值
+                shap_values = explainer_shap.shap_values(features)
+                
+                # 创建图表
+                fig, ax = plt.subplots(figsize=(12, 6))
+                
+                # 创建SHAP force plot
+                shap.force_plot(
+                    explainer_shap.expected_value,
+                    shap_values[0] if len(shap_values.shape) == 2 else shap_values,
+                    pd.DataFrame([feature_values], columns=feature_names),
+                    matplotlib=True,
+                    show=False
+                )
+                
+                plt.title("SHAP Force Plot - 特征贡献可视化", fontsize=14, pad=20)
+                plt.tight_layout()
+                
+                # 保存并显示图像
+                plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=300)
+                st.image("shap_force_plot.png", caption='SHAP Force Plot Explanation')
+                
+            except Exception as e:
+                # 捕获所有异常并显示错误信息
+                st.error(f"生成SHAP解释图时出错: {str(e)}")
+                st.info("请检查: 1) 模型是否支持SHAP解释 2) 特征数据格式是否正确")
+                
+            finally:
+                # 无论是否发生异常都执行清理
+                plt.close('all')  # 关闭所有matplotlib图形，释放内存
