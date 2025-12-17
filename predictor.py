@@ -57,7 +57,12 @@ Vmi = st.number_input("(Vmi, cm³/g)", min_value=0.0, max_value=1.07, value=0.2,
 RT = st.number_input("(RT,℃)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
 
 # 压强 (P, bar)：数值输入框
-P = st.number_input("(P, bar)", min_value=0.0, max_value=50, value=1.0, step=0.1,format="%.1f")
+P = st.number_input("压强 (P, bar) [0.1步进]", 
+                    min_value=0.0, 
+                    max_value=50.0, 
+                    value=1.0, 
+                    step=0.1,  # 保持步进0.1但调整标签说明
+                    help="建议使用0.1-5.0 bar范围进行实验")
 
 # 碳含量 (C, %)：数值输入框
 C = st.number_input("(C, %)", min_value=0.0, max_value=100.0, value=80.0, step=1.0)  # 修正：变量名改为大写C以保持一致性
