@@ -132,7 +132,7 @@ if st.button("Predict", use_container_width=True):
                 st.info("Recommendation: Adjusting the material composition or synthesis route is advised to improve adsorption performance")
             
             # SHAP 解释
-            st.markdown(" SHAP 解释")
+            st.markdown(" SHAP explanations")
             
             try:
                 # 创建SHAP解释器
