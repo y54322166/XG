@@ -42,7 +42,7 @@ feature_names = [
 st.title("CO₂ Adsorption Capacity Predictor")  # 设置网页标题
 
 # 比表面积：数值输入框
-SSA = st.number_input("SSA,m²/g)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
+SSA = st.number_input"(SSA,m²/g)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
 
 # 总孔体积：数值输入框
 PV = st.number_input("(PV, cm³/g)", min_value=0.0, max_value=1.58, value=0.5, step=0.0001)
