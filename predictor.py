@@ -42,22 +42,22 @@ feature_names = [
 st.title("CO₂ Adsorption Capacity Predictor")  # 设置网页标题
 
 # 比表面积：数值输入框
-SSA = st.number_input("(SSA,m²/g)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
+SSA = st.number_input("(BETsurfacearea（SSA,m²/g）)", min_value=0.0, max_value=5000.0, value=1000.0, step=10.0)
 
 # 总孔体积：数值输入框
-PV = st.number_input("(PV, cm³/g)", min_value=0.0, max_value=1.58, value=0.5, step=0.0001)
+PV = st.number_input("(Porevolume（PV, cm³/g）)", min_value=0.0, max_value=1.58, value=0.5, step=0.0001)
 
 # 介孔体积：数值输入框
-Vme = st.number_input("(Vme, cm³/g)", min_value=0.0, max_value=0.67, value=0.3, step=0.0001)
+Vme = st.number_input("(Mesopore volume（Vme, cm³/g）)", min_value=0.0, max_value=0.67, value=0.3, step=0.0001)
 
 # 微孔体积：数值输入框
-Vmi = st.number_input("(Vmi, cm³/g)", min_value=0.0, max_value=1.07, value=0.2, step=0.0001)
+Vmi = st.number_input("(Micropore volume（Vmi, cm³/g）)", min_value=0.0, max_value=1.07, value=0.2, step=0.0001)
 
 # 温度 (RT, ℃)：数值输入框
-RT = st.number_input("(RT,℃)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
+RT = st.number_input("(Reactortemperature（RT,℃）)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
 
 # 压强 (P, bar)：数值输入框
-P = st.number_input("(P, bar) ", 
+P = st.number_input("(Pressure（P, bar）) ", 
                     min_value=0.0, 
                     max_value=50.0, 
                     value=1.0, 
@@ -77,7 +77,7 @@ O = st.number_input("(O, %)", min_value=0.0, max_value=50.0, value=10.0, step=0.
 Pre = st.selectbox("(Pre)：", options=range(0, 131))  # 包含0到130
 
 # 改性方法（Mod）：分类选择框（0-9）
-Mod = st.selectbox("(Mod)：", options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+Mod = st.selectbox("(Modification method（Mod）)：", options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 # 处理输入数据并进行预测
 feature_values = [SSA, PV, Vme, Vmi, RT, P, C, N, O, Pre, Mod]  # 将用户输入的特征值存入列表
