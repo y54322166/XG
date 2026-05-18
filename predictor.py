@@ -29,7 +29,7 @@ feature_names = [
     "PV",     # 总孔体积
     "Vme",     # 介孔体积
     "Vmi",     # 微孔体积
-    "RT",     # 温度
+    "T",     # 温度
     "P",     # 压力
     "C",     # 碳含量
     "N",     # 氮含量
@@ -53,8 +53,8 @@ Vme = st.number_input("(Mesopore volume（Vme, cm³/g）)", min_value=0.0, max_v
 # 微孔体积：数值输入框
 Vmi = st.number_input("(Micropore volume（Vmi, cm³/g）)", min_value=0.0, max_value=1.07, value=0.2, step=0.0001)
 
-# 温度 (RT, ℃)：数值输入框
-RT = st.number_input("(Reactortemperature（RT,℃）)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
+# 温度 (T, ℃)：数值输入框
+RT = st.number_input("(Reactortemperature（T,℃）)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
 
 # 压强 (P, bar)：数值输入框
 P = st.number_input("(Pressure（P, bar）) ", 
